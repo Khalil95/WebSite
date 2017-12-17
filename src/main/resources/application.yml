@@ -1,0 +1,10 @@
+server:
+  port: 8083
+  contextPath: /firstSpring
+spring:
+  datasource:
+    password: 2254Bhil123
+    url: jdbc:mysql://localhost:3306/javawebbd?user=root
+  jpa:
+    hibernate:
+      show-sql: true

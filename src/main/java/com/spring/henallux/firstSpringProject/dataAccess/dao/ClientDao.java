@@ -20,7 +20,6 @@ public class ClientDao {
     ClientRepository clientRepository;
 
     public Client inscriptionClient(Client client) {
-        //mettre les variable declarer dans la classe dans les methode !
         ClientEntity clientEntity = providerConverterClient.ClientModelToClientEntity(client);
         clientEntity.setPassword(EncryptionPassword.getEncryptionPassword(clientEntity.getPassword()));
         clientEntity = clientRepository.save(clientEntity);
@@ -29,11 +28,12 @@ public class ClientDao {
 
 
     public Client getClientByEmail(String email){
-        Client client = new Client();
+        Client client;
         ClientEntity clientEntity = clientRepository.findByEmail(email);
 
-        if(clientEntity == null)
+        if(clientEntity == null) {
             return null;
+        }
 
         client = providerConverterClient.clientEntityToClientModel(clientEntity);
         return client;

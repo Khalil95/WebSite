@@ -57,8 +57,6 @@ public class ConnectionController {
                 return "redirect:/home";
             }
         }
-
-
         return "integrated:connection";
 
     }

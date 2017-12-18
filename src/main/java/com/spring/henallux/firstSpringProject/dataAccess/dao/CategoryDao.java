@@ -39,7 +39,6 @@ public class CategoryDao {
         {
             Category category = providerConverterCategory.categoryEntityToCategoryModel(categoryEntity);
             category.setName(categoryTranslationRepository.findNameCategoryByLanguage(category.getId(), codeLanguage));
-            System.out.println(" bd nom cat : "+category.getName());
             categoryArrayList.add(category);
         }
 

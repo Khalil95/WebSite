@@ -31,7 +31,6 @@ public class CommandController {
 
         model.addAttribute("allcommand", commands);
 
-
         return "integrated:/orderhistory";
     }
 

@@ -31,11 +31,9 @@ public class InscriptionController {
         return new Client();
     }
 
-
     @RequestMapping (method = RequestMethod.GET)
     public String home(Model model){
         model.addAttribute("title", "Nom titre");
-        // model.addAttribute("clientForm", new Client());
         return "integrated:connectionInscription";
     }
 

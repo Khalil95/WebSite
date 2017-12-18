@@ -1,5 +1,6 @@
 package com.spring.henallux.firstSpringProject.Controlleur;
 
+import com.spring.henallux.firstSpringProject.Enumeration.EnumStatutCommand;
 import com.spring.henallux.firstSpringProject.dataAccess.dao.ArticleDao;
 import com.spring.henallux.firstSpringProject.dataAccess.dao.CommandDao;
 import com.spring.henallux.firstSpringProject.model.Article;
@@ -39,9 +40,8 @@ public class CartController {
     @RequestMapping(method= RequestMethod.GET)
     public String listCart(Model model, Locale locale, @ModelAttribute(value=CURRENTCART)HashMap<Integer, Integer> cart) {
 
-        HashMap<Article, Integer> articles = new HashMap<Article, Integer>();
+        Map<Article, Integer> articles = new HashMap<>();
 
-        int total = 0;
         double price = 0;
         for (Map.Entry<Integer, Integer> entry: cart.entrySet()){
             Article article = articleDao.getOneArticle(entry.getKey());
@@ -51,12 +51,10 @@ public class CartController {
                 return "redirect:home/"+entry.getKey();
             }
 
-
             price += article.getPrice() * entry.getValue();
             articles.put(article, entry.getValue());
         }
 
-        System.out.println("listCard : "+articles);
 
         model.addAttribute("priceTotal", price);
         model.addAttribute("articlesCart", articles);
@@ -125,17 +123,14 @@ public class CartController {
         if(!client.isRegistered())
             return "redirect:/connectionClient";
 
-        HashMap<Article, Integer> articles = new HashMap<Article, Integer>();
-
-        double price = 0;
-
+        Map<Article, Integer> articles = new HashMap<>();
+        double price = 0.00;
         for (Map.Entry<Integer,Integer> entry: cart.entrySet()) {
 
             Article article = articleDao.getOneArticle(entry.getKey());
 
             price += article.getPrice() * entry.getValue();
             articles.put(article, entry.getValue());
-
         }
 
         model.addAttribute("priceTotal", price);
@@ -167,22 +162,15 @@ public class CartController {
 
             commandLines.add(commandLine);
 
-            System.out.println("para 1 : "+entry.getKey()+", para 2 : "+entry.getValue());
-
             articleDao.updateQtyStockArticle(entry.getKey(), entry.getValue());
 
         }
 
         command.setTotal_price(price);
 
-        command.setStatus("paid");
-
-        // voir si payer !!!
-
-
+        command.setStatus(EnumStatutCommand.PAID.getCode());
 
         commandDao.addCommand(command, commandLines);
-
 
         return "redirect:/command";
     }

@@ -1,5 +1,6 @@
 package com.spring.henallux.firstSpringProject.Controlleur;
 
+import com.spring.henallux.firstSpringProject.Enumeration.EnumPages;
 import com.spring.henallux.firstSpringProject.dataAccess.dao.ArticleDao;
 import com.spring.henallux.firstSpringProject.dataAccess.dao.CategoryDao;
 import com.spring.henallux.firstSpringProject.model.Article;
@@ -29,17 +30,16 @@ public class HomeController {
         model.addAttribute("categories", categoryDao.getCategories(locale.getLanguage()));
         model.addAttribute("articles", articleDao.getArticles(locale.getLanguage()));
         System.out.println(articleDao.getArticles(locale.getLanguage()));
-        return "integrated:home";
+        return EnumPages.HOME.getTitle();
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/{idArticle}")
     public String detailArticle(Model model, Locale locale, @PathVariable Integer idArticle)
     {
-        System.out.println("icicicici detail");
         Article article = articleDao.getOneArticle(idArticle);
         System.out.println(article);
         if(article == null){
-            return "redirect:/home";
+            return EnumPages.HOME.getRedirection();
         }
         model.addAttribute("articleDetail", article);
         return "integrated:articleDetail";

@@ -112,11 +112,7 @@
     <main>
        <div>
             <tiles:insertAttribute name = "main-content"/>
-            <img src='<spring:url value="/images/paysageCalme.jpg"/>'/>
-            <%--<img src='<spring:url value="/images/bmwLogo.jpg"/>'/>--%>
-            <c:forEach items="${articles}" var="article">
-                <h3>${article.name}<br><b>${article.price}</b></h3>
-            </c:forEach>
+
         </div>
 
         <div class="w3-container w3-text-grey" id="jeans">

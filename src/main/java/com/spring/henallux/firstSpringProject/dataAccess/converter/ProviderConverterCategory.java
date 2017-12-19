@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProviderConverterCategory {
 
-
     public Category categoryEntityToCategoryModel(CategoryEntity categoryEntity) {
         Category category = new Category();
         category.setId(categoryEntity.getId());

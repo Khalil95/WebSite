@@ -9,44 +9,44 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
-@Table(name="client")
-public class ClientEntity implements UserDetails{
+@Table(name = "client")
+public class ClientEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String first_name;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String last_name;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
-    @Column(name="phone_number")
+    @Column(name = "phone_number")
     private String phone_number;
 
-    @Column(name="number_address")
+    @Column(name = "number_address")
     private String number_address;
 
-    @Column(name="street_name")
+    @Column(name = "street_name")
     private String street_name;
 
-    @Column(name="zip")
+    @Column(name = "zip")
     private Integer zip;
 
-    @Column(name="city")
+    @Column(name = "city")
     private String city;
 
-    @Column(name="country")
+    @Column(name = "country")
     private String country;
 
-    @Column(name="job")
+    @Column(name = "job")
     private String job;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientEntity")

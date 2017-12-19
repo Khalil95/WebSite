@@ -1,5 +1,6 @@
 package com.spring.henallux.firstSpringProject.Controlleur;
 
+import com.spring.henallux.firstSpringProject.Enumeration.EnumPages;
 import com.spring.henallux.firstSpringProject.dataAccess.dao.ClientDao;
 import com.spring.henallux.firstSpringProject.model.Client;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,59 +11,51 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 import java.util.Locale;
 
 @Controller
-@RequestMapping(value="/inscriptionClient")
+@RequestMapping(value = "/inscriptionClient")
 @SessionAttributes({InscriptionController.CURRENTCLIENT})
 public class InscriptionController {
 
     protected static final String CURRENTCLIENT = "currentClient";
-
     @Autowired
     public ClientDao clientDao;
 
     @ModelAttribute(CURRENTCLIENT)
-    public Client client(){
+    public Client client() {
         return new Client();
     }
 
-    @RequestMapping (method = RequestMethod.GET)
-    public String home(Model model){
+    @RequestMapping(method = RequestMethod.GET)
+    public String home(Model model) {
         model.addAttribute("title", "Nom titre");
-        return "integrated:connectionInscription";
+        return EnumPages.CONNECTION_INSCRIPTION.getPage();
     }
 
     @RequestMapping(value = "/send", method = RequestMethod.POST)
-    public String getFormData(Model model, @ModelAttribute(value=CURRENTCLIENT)@Valid Client client, final BindingResult errors, Locale locale){
-        System.out.println("job : "+client.getJob());
-        if (!errors.hasErrors())
-        {
-            if(clientDao.getClientByEmail(client.getEmail()) != null)
-            {
+    public String getFormData(@ModelAttribute(value = CURRENTCLIENT) @Valid Client client, final BindingResult errors, Locale locale) {
+        Client user = clientDao.getClientByEmail(client.getEmail());
+        if (!errors.hasErrors()) {
+            if (user != null) {
                 errors.rejectValue("email", "registered.email");
-                return "integrated:connectionInscription";
+                return EnumPages.CONNECTION_INSCRIPTION.getPage();
             }
             clientDao.inscriptionClient(client);
             client.setRegistered(true);
-            return "redirect:/home";
-        }
-        else
-        {
-            if(!client.getPasswordConfirmation().equals(client.getPassword()))
+            return EnumPages.HOME.getRedirection();
+        } else {
+            if (!client.getPasswordConfirmation().equals(client.getPassword()))
                 errors.rejectValue("passwordConfirmation", "notmatch.password");
-            return "integrated:connectionInscription";
+            return EnumPages.CONNECTION_INSCRIPTION.getPage();
         }
-
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/send")
-    public String registerBis(Model model,@ModelAttribute(value="currentUser")@Valid Client client,final BindingResult errors){
-        return "redirect:/connectionInscription";
+    @RequestMapping(method = RequestMethod.GET, value = "/send")
+    public String registerBis(Model model, @ModelAttribute(value = "currentUser") @Valid Client client, final BindingResult errors) {
+        return EnumPages.CONNECTION_INSCRIPTION.getRedirection();
     }
 
 }

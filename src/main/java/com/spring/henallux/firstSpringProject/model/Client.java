@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-public class Client{
+public class Client {
 
     private Integer id;
     @NotEmpty(message = "This field is required !")
@@ -20,17 +20,17 @@ public class Client{
     @Email
     private String email;
     @NotEmpty
-    @Size(min =4, max = 16)
+    @Size(min = 4, max = 16)
     private String password;
     @NotNull
-    @Size(min=4, max=16)
+    @Size(min = 4, max = 16)
     private String passwordConfirmation;
     @NotEmpty
     @Size(min = 2, max = 50)
     private String first_name;
     @NotEmpty
     @Size(min = 2, max = 50)
-    private  String last_name;
+    private String last_name;
     @NotEmpty
     @Size(min = 2, max = 50)
     private String street_name;
@@ -54,10 +54,11 @@ public class Client{
 
     private String job;
 
-    private  Command command;
+    private Command command;
     private boolean registered;
 
-    public Client(){}
+    public Client() {
+    }
 
     public Command getCommand() {
         return command;
@@ -90,7 +91,6 @@ public class Client{
     public void setZip(Integer zip) {
         this.zip = zip;
     }
-
 
 
     public void setCountry(String country) {

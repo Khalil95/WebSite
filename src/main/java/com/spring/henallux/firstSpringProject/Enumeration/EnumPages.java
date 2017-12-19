@@ -3,22 +3,29 @@ package com.spring.henallux.firstSpringProject.Enumeration;
 public enum EnumPages {
 
     HOME("integrated:home", "redirect:/home"),
-    CART("integrated:cart", "redirect:/cart");
+    CART("integrated:cart", "redirect:/cart"),
+    ARTICLE_DETAIL("integrated:articleDetail", ""),
+    CARRELAGE_INTERIEUR("integrated:carrelageInterieur", ""),
+    CHECKOUT("integrated:chekout", ""),
+    CONNECTION("integration:connection", "redirect:/connection"),
+    CONNECTION_INSCRIPTION("integrated:connectionInscription", "redirect:/connectionInscription"),
+    ORDER_HISTORY("integrated:orderhistory", "");
 
-    private String title;
+
+    private String page;
     private String redirection;
 
-    EnumPages(String title, String redirection) {
-        this.title = title;
+    EnumPages(String page, String redirection) {
+        this.page = page;
         this.redirection = redirection;
     }
 
-    public String getTitle() {
-        return title;
+    public String getPage() {
+        return page;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String page) {
+        this.page = page;
     }
 
     public String getRedirection() {

@@ -18,7 +18,7 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Integer>
 
     @Modifying
     @Query(REQUEST)
-    public void updateQuantityArticle(@Param("idart") Integer id, @Param("qty")Integer qty);
+    void updateQuantityArticle(@Param("idart") Integer id, @Param("qty")Integer qty);
 
 
 }

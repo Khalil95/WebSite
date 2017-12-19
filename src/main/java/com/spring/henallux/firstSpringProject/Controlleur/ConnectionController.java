@@ -1,5 +1,6 @@
 package com.spring.henallux.firstSpringProject.Controlleur;
 
+import com.spring.henallux.firstSpringProject.Enumeration.EnumPages;
 import com.spring.henallux.firstSpringProject.dataAccess.dao.ClientDao;
 import com.spring.henallux.firstSpringProject.model.Client;
 import com.spring.henallux.firstSpringProject.service.EncryptionPassword;
@@ -18,7 +19,7 @@ import java.util.Locale;
 
 
 @Controller
-@RequestMapping(value="/connectionClient")
+@RequestMapping(value = "/connectionClient")
 @SessionAttributes({InscriptionController.CURRENTCLIENT})
 public class ConnectionController {
 
@@ -28,24 +29,23 @@ public class ConnectionController {
     public ClientDao clientDao;
 
     @ModelAttribute(CURRENTCLIENT)
-    public Client client(){
+    public Client client() {
         return new Client();
     }
 
-    @RequestMapping(method= RequestMethod.GET)
-    public String home(Model model, @ModelAttribute(CURRENTCLIENT)Client client, Locale locale) {
+    @RequestMapping(method = RequestMethod.GET)
+    public String home(Model model, @ModelAttribute(CURRENTCLIENT) Client client, Locale locale) {
         model.addAttribute("title", "Nom titre");
         model.addAttribute("email", client.getEmail());
         model.addAttribute("name", client.getFirst_name());
         model.addAttribute("loginForm", new LoginForm());
-        return "integrated:connection";
+        return EnumPages.CONNECTION.getPage();
     }
 
-    @RequestMapping(method=RequestMethod.POST, value="/send")
-    public String login(Model model, @ModelAttribute(value=CURRENTCLIENT) Client currentClient, Authentication authentication, Locale locale, @ModelAttribute(value="loginForm") LoginForm loginForm, final BindingResult errors) {
+    @RequestMapping(method = RequestMethod.POST, value = "/send")
+    public String login(Model model, @ModelAttribute(value = CURRENTCLIENT) Client currentClient, Authentication authentication, Locale locale, @ModelAttribute(value = "loginForm") LoginForm loginForm, final BindingResult errors) {
         Client client = /*clientDao.getClientByEmail(loginForm.getEmail());*/ (Client) authentication.getPrincipal();
 
-        System.out.println(locale.getDisplayLanguage());
         if (client == null)
             errors.rejectValue("email", "email.notfound");
 
@@ -56,16 +56,16 @@ public class ConnectionController {
                 client.setRegistered(true);
                 currentClient = client;
                 model.addAttribute("currentClient", currentClient);
-                return "redirect:/home";
+                return EnumPages.HOME.getRedirection();
             }
         }
         return "integrated:connection";
 
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/send")
-    public String loginBis(Model model,@ModelAttribute(value=CURRENTCLIENT) Client currentClient, Locale locale,@ModelAttribute(value="loginForm") LoginForm loginForm,final BindingResult errors){
-        return "redirect:/connection";
+    @RequestMapping(method = RequestMethod.GET, value = "/send")
+    public String loginBis(@ModelAttribute(value = CURRENTCLIENT) Client currentClient, Locale locale, @ModelAttribute(value = "loginForm") LoginForm loginForm, final BindingResult errors) {
+        return EnumPages.CONNECTION.getRedirection();
     }
 
 

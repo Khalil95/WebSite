@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name="category")
+@Table(name = "category")
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     public void setId(Integer id) {
@@ -30,7 +30,7 @@ public class CategoryEntity {
         return name;
     }
 
-    @OneToMany(mappedBy="categoryEntity")
+    @OneToMany(mappedBy = "categoryEntity")
     private Collection<CategoryTranslationEntity> categoryTranslationEntityCollection;
 
     public Collection<CategoryTranslationEntity> getCategoryTranslationEntityCollection() {

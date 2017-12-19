@@ -9,11 +9,11 @@ public class Location {
     private Integer id;
 
     @NotEmpty
-    @Size(min=1, max=200)
+    @Size(min = 1, max = 200)
     private String name;
 
     @NotEmpty
-    @Size(min=4, max=6)
+    @Size(min = 4, max = 6)
     private String zip;
 
     public Integer getId() {

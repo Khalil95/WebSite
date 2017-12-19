@@ -3,12 +3,12 @@ package com.spring.henallux.firstSpringProject.dataAccess.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="articletranslation")
+@Table(name = "articletranslation")
 public class ArticleTranslationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "label")
@@ -17,11 +17,11 @@ public class ArticleTranslationEntity {
     @Column(name = "description")
     private String description;
 
-    @JoinColumn(name="idArticle",referencedColumnName="id")
+    @JoinColumn(name = "idArticle", referencedColumnName = "id")
     @ManyToOne
     private ArticleEntity articleEntity;
 
-    @JoinColumn(name="idLanguage",referencedColumnName="id")
+    @JoinColumn(name = "idLanguage", referencedColumnName = "id")
     @ManyToOne
     private LanguageEntity languageEntity;
 

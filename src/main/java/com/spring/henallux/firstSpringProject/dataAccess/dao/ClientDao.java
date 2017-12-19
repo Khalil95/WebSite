@@ -27,19 +27,17 @@ public class ClientDao {
     }
 
 
-    public Client getClientByEmail(String email){
+    public Client getClientByEmail(String email) {
         Client client;
         ClientEntity clientEntity = clientRepository.findByEmail(email);
 
-        if(clientEntity == null) {
+        if (clientEntity == null) {
             return null;
         }
 
         client = providerConverterClient.clientEntityToClientModel(clientEntity);
         return client;
     }
-
-
 
 
 }

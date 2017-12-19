@@ -24,7 +24,7 @@ public class CommandDao {
     @Autowired
     CommandRepository commandRepository;
 
-    public void addCommand(Command command, List<CommandLine> commandLines){
+    public void addCommand(Command command, List<CommandLine> commandLines) {
 
         command.setCommandLines(commandLines);
         CommandEntity commandEntity = providerConverterCommand.commandModelToCommandEntity(command);
@@ -32,9 +32,9 @@ public class CommandDao {
 
     }
 
-    public ArrayList<Command> getCommandByClient(Client client){
-        ArrayList<CommandEntity> commandEntities = commandRepository.findByClientEntityId(client.getId());
-        ArrayList<Command> commands = new ArrayList<>();
+    public List<Command> getCommandByClient(Client client) {
+        List<CommandEntity> commandEntities = commandRepository.findByClientEntityId(client.getId());
+        List<Command> commands = new ArrayList<>();
 
         commandEntities.forEach(var -> commands.add(providerConverterCommand.commandEntityToCommandModel(var)));
 

@@ -25,18 +25,16 @@ public class CategoryDao {
     @Autowired
     private CategoryTranslationRepository categoryTranslationRepository;
 
-    public List<Category> getCategories(String locale)
-    {
+    public List<Category> getCategories(String locale) {
         int codeLanguage = 1;
 
-        if(locale.equals("fr"))
+        if (locale.equals("fr"))
             codeLanguage = 2;
 
         List<CategoryEntity> categoryEntities = categoryRepository.findAll();
         List<Category> categoryArrayList = new ArrayList<>();
 
-        for(CategoryEntity categoryEntity : categoryEntities)
-        {
+        for (CategoryEntity categoryEntity : categoryEntities) {
             Category category = providerConverterCategory.categoryEntityToCategoryModel(categoryEntity);
             category.setName(categoryTranslationRepository.findNameCategoryByLanguage(category.getId(), codeLanguage));
             categoryArrayList.add(category);

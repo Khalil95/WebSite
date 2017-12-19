@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="include/importTags.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="include/importTags.jsp" %>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${title}</title>
 </head>
@@ -26,7 +26,8 @@
         <tr>
             <td data-th="Product">
                 <div class="row">
-                    <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+                    <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..."
+                                                         class="img-responsive"/></div>
                     <div class="col-sm-10">
                         <h4 class="nomargin">Product: ${article.key.name}</h4>
                         <p>${article.key.description}</p>
@@ -38,8 +39,10 @@
                 <p>${article.value}</p>
             </td>
             <script>
-                var priceU = ${article.value} * ${article.key.price};
-                document.write("<td data-th=\"Subtotal\" class=\"text-center\">"+priceU+"$</td>");
+                var priceU =
+                ${article.value} *
+                ${article.key.price};
+                document.write("<td data-th=\"Subtotal\" class=\"text-center\">" + priceU + "$</td>");
             </script>
             <!--<td data-th="Subtotal" class="text-center">1.99$</td>-->
             <td class="actions" data-th="">
@@ -56,7 +59,8 @@
         <td><a href="/firstSpring/cart" class="btn btn-warning"><i class="fa fa-angle-left"></i>back</a></td>
         <td colspan="2" class="hidden-xs"></td>
         <td class="hidden-xs text-center"><strong>Total : ${priceTotal}$</strong></td>
-        <td><a href="/firstSpring/cart/buyCommand" class="btn btn-success btn-block">Pay now<i class="fa fa-angle-right"></i></a></td>
+        <td><a href="/firstSpring/cart/buyCommand" class="btn btn-success btn-block">Pay now<i
+                class="fa fa-angle-right"></i></a></td>
         <td>
 
 
@@ -74,7 +78,7 @@
                     // PayPal Client IDs - replace with your own
                     // Create a PayPal app: https://developer.paypal.com/developer/applications/create
                     client: {
-                        sandbox:    'AXBGK-LNNqmvwtZj2pn1atD8_l51x0tN91ohLDuYiad6dt-JnNDG-fvqYQNhuEWW2IQ_iehcwE_zNBAq',
+                        sandbox: 'AXBGK-LNNqmvwtZj2pn1atD8_l51x0tN91ohLDuYiad6dt-JnNDG-fvqYQNhuEWW2IQ_iehcwE_zNBAq',
                         production: 'EBFnuJsdSYgX78tZDA54pTTjDH4-EbMTXGVcBo98mPa82ITIYSvBEN_3YaoZ5e2BmDVHWCZFUmX7Jc1n'
                     },
 
@@ -82,14 +86,14 @@
                     commit: true,
 
                     // payment() is called when the button is clicked
-                    payment: function(data, actions) {
+                    payment: function (data, actions) {
 
                         // Make a call to the REST api to create the payment
                         return actions.payment.create({
                             payment: {
                                 transactions: [
                                     {
-                                        amount: { total: '${priceTotal}', currency: 'USD' }
+                                        amount: {total: '${priceTotal}', currency: 'USD'}
                                     }
                                 ]
                             }
@@ -97,10 +101,10 @@
                     },
 
                     // onAuthorize() is called when the buyer approves the payment
-                    onAuthorize: function(data, actions) {
+                    onAuthorize: function (data, actions) {
 
                         // Make a call to the REST api to execute the payment
-                        return actions.payment.execute().then(function() {
+                        return actions.payment.execute().then(function () {
                             window.alert('Payment Complete!');
                             window.location.href = '/firstSpring/cart/buyCommand';
                         });

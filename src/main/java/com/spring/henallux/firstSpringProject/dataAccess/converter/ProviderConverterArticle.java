@@ -16,14 +16,11 @@ public class ProviderConverterArticle {
         article.setDescription(articleEntity.getDescription());
         article.setName(articleEntity.getName());
         article.setPicture(articleEntity.getPicture());
-
         return article;
     }
 
-    public ArticleEntity articleModelToArticleEntity(Article article){
-
+    public ArticleEntity articleModelToArticleEntity(Article article) {
         ArticleEntity articleEntity = new ArticleEntity();
-
         articleEntity.setId(article.getId());
         articleEntity.setReference(article.getReference());
         articleEntity.setPrice(article.getPrice());
@@ -31,7 +28,6 @@ public class ProviderConverterArticle {
         articleEntity.setDescription(article.getDescription());
         articleEntity.setName(article.getName());
         articleEntity.setPicture(article.getDescription());
-
         return articleEntity;
     }
 }

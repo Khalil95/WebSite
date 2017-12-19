@@ -11,7 +11,8 @@ public class CommandLine {
     private double price_article;
     private Command command;
 
-    public CommandLine(){}
+    public CommandLine() {
+    }
 
     public CommandLine(Integer number_article, Article article, double price_article, Command command) {
         this.number_article = number_article;

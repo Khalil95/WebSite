@@ -1,5 +1,6 @@
 package com.spring.henallux.firstSpringProject.Controlleur;
 
+import com.spring.henallux.firstSpringProject.Enumeration.EnumPages;
 import com.spring.henallux.firstSpringProject.Enumeration.EnumStatutCommand;
 import com.spring.henallux.firstSpringProject.dataAccess.dao.ArticleDao;
 import com.spring.henallux.firstSpringProject.dataAccess.dao.CommandDao;
@@ -22,14 +23,18 @@ import java.util.*;
 public class CartController {
 
     protected static final String CURRENTCART = "currentCart";
-    int qty;
+    Integer qty;
 
     @ModelAttribute(CURRENTCART)
-    public HashMap<Integer, Integer> getCurrentCart(){ return new HashMap<Integer, Integer>();}
+    public Map<Integer, Integer> getCurrentCart() {
+        return new HashMap<>();
+    }
 
 
     @ModelAttribute("currentClient")
-    public Client client(){return new Client();}
+    public Client client() {
+        return new Client();
+    }
 
     @Autowired
     private ArticleDao articleDao;
@@ -37,95 +42,93 @@ public class CartController {
     @Autowired
     private CommandDao commandDao;
 
-    @RequestMapping(method= RequestMethod.GET)
-    public String listCart(Model model, Locale locale, @ModelAttribute(value=CURRENTCART)HashMap<Integer, Integer> cart) {
+    @RequestMapping(method = RequestMethod.GET)
+    public String listCart(Model model, Locale locale, @ModelAttribute(value = CURRENTCART) HashMap<Integer, Integer> cart) {
 
         Map<Article, Integer> articles = new HashMap<>();
+        /*
+        * Much faster and consumes less memory.
+        * Concats String together
+         */
+        StringBuilder sb = new StringBuilder();
 
         double price = 0;
-        for (Map.Entry<Integer, Integer> entry: cart.entrySet()){
+        for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
             Article article = articleDao.getOneArticle(entry.getKey());
 
-            if(entry.getValue() > article.getQuantityStock()){
+            if (entry.getValue() > article.getQuantityStock()) {
                 entry.setValue(this.qty);
-                return "redirect:home/"+entry.getKey();
+                sb.append(EnumPages.HOME.getRedirection()).append("/").append(entry.getKey());
+                return sb.toString();
             }
 
             price += article.getPrice() * entry.getValue();
             articles.put(article, entry.getValue());
         }
 
-
         model.addAttribute("priceTotal", price);
         model.addAttribute("articlesCart", articles);
 
-        return "integrated:cart";
+        return EnumPages.CART.getPage();
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/add/{idArticle}/{qty}")
-    public String  addArticle(Model model, @PathVariable Integer idArticle, @PathVariable Integer qty,  @ModelAttribute(value=CURRENTCART)HashMap<Integer, Integer> cart){
+    @RequestMapping(method = RequestMethod.GET, value = "/add/{idArticle}/{qty}")
+    public String addArticle(Model model, @PathVariable Integer idArticle, @PathVariable Integer qty, @ModelAttribute(value = CURRENTCART) HashMap<Integer, Integer> cart) {
 
-        if(qty <= 0){
-            return "redirect:/home";
+        if (qty <= 0) {
+            return EnumPages.HOME.getRedirection();
         }
 
-        if(cart.containsKey(idArticle))
-        {
+        if (cart.containsKey(idArticle)) {
             Integer val = cart.get(idArticle);
-        } else
-        {
+        } else {
             cart.put(idArticle, qty);
         }
-        this.qty =qty;
+        this.qty = qty;
 
-        return "redirect:/cart";
+        return EnumPages.CART.getRedirection();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="/delete/{idArticle}")
-    public String deleteArticleCart(Model model, @PathVariable Integer idArticle, @ModelAttribute(value=CURRENTCART)HashMap<Integer, Integer> cart){
-        if(cart.containsKey(idArticle))
-        {
+    @RequestMapping(method = RequestMethod.GET, value = "/delete/{idArticle}")
+    public String deleteArticleCart(Model model, @PathVariable Integer idArticle, @ModelAttribute(value = CURRENTCART) HashMap<Integer, Integer> cart) {
+        if (cart.containsKey(idArticle)) {
             cart.remove(idArticle);
-        }
-        else
-        {
-            return "redirect:/cart";
+        } else {
+            return EnumPages.CART.getRedirection();
         }
 
-        return "redirect:/cart";
+        return EnumPages.CART.getRedirection();
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/update/{idArticle}/{qty}")
-    public String updateCart(Model model, @PathVariable Integer idArticle, @PathVariable Integer qty,  @ModelAttribute(value=CURRENTCART)HashMap<Integer, Integer> cart){
+    @RequestMapping(method = RequestMethod.GET, value = "/update/{idArticle}/{qty}")
+    public String updateCart(Model model, @PathVariable Integer idArticle, @PathVariable Integer qty, @ModelAttribute(value = CURRENTCART) HashMap<Integer, Integer> cart) {
 
-        if(qty <= 0){
-            return "redirect:/cart";
+        if (qty <= 0) {
+            return EnumPages.CART.getRedirection();
         }
 
-        if(cart.containsKey(idArticle))
-        {
+        if (cart.containsKey(idArticle)) {
             Integer val = cart.get(idArticle);
 
             cart.replace(idArticle, val, qty);
         } else {
-            return "redirect:/cart";
+            return EnumPages.CART.getRedirection();
         }
 
-        return "redirect:/cart";
+        return EnumPages.CART.getRedirection();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="/checkout")
-    public String checkOutCommand(Model model, Locale locale, @ModelAttribute(value=CURRENTCART)HashMap<Integer, Integer> cart, @ModelAttribute(value="currentClient")Client client)
-    {
-        if(cart.size() == 0)
-            return "redirect:/cart";
+    @RequestMapping(method = RequestMethod.GET, value = "/checkout")
+    public String checkOutCommand(Model model, Locale locale, @ModelAttribute(value = CURRENTCART) HashMap<Integer, Integer> cart, @ModelAttribute(value = "currentClient") Client client) {
+        if (cart.size() == 0)
+            return EnumPages.CART.getRedirection();
 
-        if(!client.isRegistered())
+        if (!client.isRegistered())
             return "redirect:/connectionClient";
 
         Map<Article, Integer> articles = new HashMap<>();
         double price = 0.00;
-        for (Map.Entry<Integer,Integer> entry: cart.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
 
             Article article = articleDao.getOneArticle(entry.getKey());
 
@@ -136,13 +139,13 @@ public class CartController {
         model.addAttribute("priceTotal", price);
         model.addAttribute("articlesCart", articles);
 
-        return "integrated:/checkout";
+        return EnumPages.CHECKOUT.getPage();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="/buyCommand")
-    public String buyCommand(Model model, @ModelAttribute(value = CURRENTCART) HashMap<Integer, Integer> cart, @ModelAttribute(value = "currentClient")Client client){
+    @RequestMapping(method = RequestMethod.GET, value = "/buyCommand")
+    public String buyCommand(Model model, @ModelAttribute(value = CURRENTCART) HashMap<Integer, Integer> cart, @ModelAttribute(value = "currentClient") Client client) {
 
-        if(!client.isRegistered())
+        if (!client.isRegistered())
             return "redirect:/connectionClient";
 
         Command command = new Command(client);
@@ -150,44 +153,32 @@ public class CartController {
 
         double price = 0;
 
-        for (Map.Entry<Integer,Integer> entry: cart.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
 
             Article article = articleDao.getOneArticle(entry.getKey());
-
             double priceU = article.getPrice();
-
             price += article.getPrice() * entry.getValue();
-
-            CommandLine commandLine = new CommandLine(entry.getValue(),article,priceU,command);
-
+            CommandLine commandLine = new CommandLine(entry.getValue(), article, priceU, command);
             commandLines.add(commandLine);
-
             articleDao.updateQtyStockArticle(entry.getKey(), entry.getValue());
 
         }
 
         command.setTotal_price(price);
-
         command.setStatus(EnumStatutCommand.PAID.getCode());
-
         commandDao.addCommand(command, commandLines);
-
         return "redirect:/command";
     }
 
 
-    @RequestMapping (value ="/logout")
-    public String logoutClient(Model model, @ModelAttribute("currentClient")Client currentClient,@ModelAttribute(value=CURRENTCART)HashMap<Integer, Integer> cart,WebRequest request, SessionStatus status)
-    {
+    @RequestMapping(value = "/logout")
+    public String logoutClient(Model model, @ModelAttribute("currentClient") Client currentClient, @ModelAttribute(value = CURRENTCART) HashMap<Integer, Integer> cart, WebRequest request, SessionStatus status) {
+
         status.setComplete();
         request.removeAttribute("currentClient", WebRequest.SCOPE_SESSION);
         request.removeAttribute("currentCart", WebRequest.SCOPE_SESSION);
-
-        return "redirect:/home";
+        return EnumPages.HOME.getRedirection();
     }
-
-
-
 
 
 }

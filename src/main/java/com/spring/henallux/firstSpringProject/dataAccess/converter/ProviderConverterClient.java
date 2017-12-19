@@ -8,12 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProviderConverterClient {
 
-
-    public ClientEntity ClientModelToClientEntity(Client client)
-    {
+    public ClientEntity ClientModelToClientEntity(Client client) {
 
         ClientEntity entity = new ClientEntity();
-
         entity.setEmail(client.getEmail());
         entity.setFirst_name(client.getFirst_name());
         entity.setLast_name(client.getLast_name());
@@ -25,21 +22,16 @@ public class ProviderConverterClient {
         entity.setZip(client.getZip());
         entity.setCountry(client.getCountry());
         entity.setJob(client.getJob());
-        if(client.getId() != null)
+        if (client.getId() != null)
             entity.setId(client.getId());
-
-        if("".equals(client.getJob())) // pour gere les nul pointeur exception
+        if ("".equals(client.getJob())) // pour gere les nul pointeur exception
             entity.setJob(null);
-
-
-
         return entity;
     }
 
-    public Client clientEntityToClientModel(ClientEntity clientEntity)
-    {
-        Client model = new Client();
+    public Client clientEntityToClientModel(ClientEntity clientEntity) {
 
+        Client model = new Client();
         model.setId(clientEntity.getId());
         model.setEmail(clientEntity.getEmail());
         model.setFirst_name(clientEntity.getFirst_name());
@@ -51,12 +43,9 @@ public class ProviderConverterClient {
         model.setCity(clientEntity.getCity());
         model.setZip(clientEntity.getZip());
         model.setCountry(clientEntity.getCountry());
-
-        if(model.getJob() == null){
+        if (model.getJob() == null) {
             model.setJob(clientEntity.getJob());
         }
-
-
         return model;
     }
 }

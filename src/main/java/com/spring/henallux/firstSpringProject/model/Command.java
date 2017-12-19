@@ -16,9 +16,10 @@ public class Command {
     private List<CommandLine> commandLines;
 
 
-    public Command(){}
+    public Command() {
+    }
 
-    public Command(Client client){
+    public Command(Client client) {
         this.client = client;
         date = new Date();
     }
@@ -72,5 +73,7 @@ public class Command {
         this.commandLines = commandLines;
     }
 
-    public void addCommandLine(CommandLine commandLine){this.commandLines.add(commandLine);}
+    public void addCommandLine(CommandLine commandLine) {
+        this.commandLines.add(commandLine);
+    }
 }

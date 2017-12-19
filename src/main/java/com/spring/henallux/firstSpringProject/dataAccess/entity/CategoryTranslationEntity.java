@@ -3,23 +3,23 @@ package com.spring.henallux.firstSpringProject.dataAccess.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="categorytranslation")
+@Table(name = "categorytranslation")
 public class CategoryTranslationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name="label")
+    @Column(name = "label")
     private String label;
 
 
-    @JoinColumn(name="idCategory",referencedColumnName="id")
+    @JoinColumn(name = "idCategory", referencedColumnName = "id")
     @ManyToOne
     private CategoryEntity categoryEntity;
 
-    @JoinColumn(name="idLanguage",referencedColumnName="id")
+    @JoinColumn(name = "idLanguage", referencedColumnName = "id")
     @ManyToOne
     private LanguageEntity languageEntity;
 

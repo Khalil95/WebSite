@@ -8,12 +8,13 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Repository
 @Transactional
 public interface CommandRepository extends JpaRepository<CommandEntity, Integer> {
 
-    public ArrayList<CommandEntity> findByClientEntityId(@Param("idClient")Integer idClient);
+    List<CommandEntity> findByClientEntityId(@Param("idClient")Integer idClient);
 
 }

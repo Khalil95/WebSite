@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 @Transactional
 public interface ClientRepository extends JpaRepository<ClientEntity, Integer> {
 
-
     ClientEntity findByEmail(@Param("email") String email);
 
 }

@@ -14,35 +14,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Locale;
 
 @Controller
-@RequestMapping(value="/home")
+@RequestMapping(value = "/home")
 public class HomeController {
 
     @Autowired
     CategoryDao categoryDao;
-
     @Autowired
     ArticleDao articleDao;
 
-    @RequestMapping(method= RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String home(Model model, Locale locale) {
-        System.out.println(categoryDao.getCategories(locale.getLanguage()));
         model.addAttribute("title", "home");
         model.addAttribute("categories", categoryDao.getCategories(locale.getLanguage()));
         model.addAttribute("articles", articleDao.getArticles(locale.getLanguage()));
-        System.out.println(articleDao.getArticles(locale.getLanguage()));
-        return EnumPages.HOME.getTitle();
+        return EnumPages.HOME.getPage();
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/{idArticle}")
-    public String detailArticle(Model model, Locale locale, @PathVariable Integer idArticle)
-    {
+    @RequestMapping(method = RequestMethod.GET, value = "/{idArticle}")
+    public String detailArticle(Model model, Locale locale, @PathVariable Integer idArticle) {
         Article article = articleDao.getOneArticle(idArticle);
-        System.out.println(article);
-        if(article == null){
+        if (article == null) {
             return EnumPages.HOME.getRedirection();
         }
         model.addAttribute("articleDetail", article);
-        return "integrated:articleDetail";
+        return EnumPages.ARTICLE_DETAIL.getPage();
     }
 
 }

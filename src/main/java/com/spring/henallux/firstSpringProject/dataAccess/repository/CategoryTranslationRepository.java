@@ -15,9 +15,8 @@ public interface CategoryTranslationRepository extends JpaRepository<CategoryTra
 
     String REQUEST = "select c.label from CategoryTranslationEntity c where c.categoryEntity.id = :idcat and c.languageEntity.id = :idlang";
 
-
     @Query(REQUEST)
-    public String findNameCategoryByLanguage(@Param("idcat") Integer idcat, @Param("idlang")Integer idlang);
+    String findNameCategoryByLanguage(@Param("idcat") Integer idcat, @Param("idlang") Integer idlang);
 
 
 }

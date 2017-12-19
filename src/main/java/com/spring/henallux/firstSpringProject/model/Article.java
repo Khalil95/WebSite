@@ -13,7 +13,8 @@ public class Article {
     private String description;
     private String picture;
 
-    public Article(){}
+    public Article() {
+    }
 
     public String getPicture() {
         return picture;
@@ -71,5 +72,9 @@ public class Article {
         this.description = description;
     }
 
-    public void updateQtyArt(Integer qty){this.quantityStock -= qty;};
+    public void updateQtyArt(Integer qty) {
+        this.quantityStock -= qty;
+    }
+
+    ;
 }

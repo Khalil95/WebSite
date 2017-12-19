@@ -5,28 +5,28 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
-@Table(name="command")
+@Table(name = "command")
 public class CommandEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name="date")
+    @Column(name = "date")
     private Date date;
 
-    @Column(name="status")
+    @Column(name = "status")
     private String status;
 
-    @Column(name="totalprice")
+    @Column(name = "totalprice")
     private double total_price;
 
-    @JoinColumn(name="idclient", referencedColumnName="id")
+    @JoinColumn(name = "idclient", referencedColumnName = "id")
     @ManyToOne(cascade = CascadeType.MERGE)
     private ClientEntity clientEntity;
 
-    @OneToMany(mappedBy="commandEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "commandEntity", cascade = CascadeType.ALL)
     private Collection<CommandLineEntity> commandLineEntityCollection;
 
     public Integer getId() {

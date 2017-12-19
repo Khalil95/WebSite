@@ -22,18 +22,16 @@ public class ArticleDao {
     @Autowired
     private ProviderConverterArticle providerConverterArticle;
 
-    public List<Article> getArticles(String locale)
-    {
+    public List<Article> getArticles(String locale) {
         int codeLanguage = 1;
 
-        if(locale.equals("fr"))
+        if (locale.equals("fr"))
             codeLanguage = 2;
 
         List<ArticleEntity> articleEntities = articleRepository.findAll();
         List<Article> articleArrayList = new ArrayList<>();
 
-        for(ArticleEntity articleEntity : articleEntities)
-        {
+        for (ArticleEntity articleEntity : articleEntities) {
             Article article = providerConverterArticle.articleEntityToArticleModel(articleEntity);
             articleArrayList.add(article);
         }
@@ -41,14 +39,13 @@ public class ArticleDao {
         return articleArrayList;
     }
 
-    public Article getOneArticle(Integer idArt){
+    public Article getOneArticle(Integer idArt) {
         ArticleEntity articleEntity = articleRepository.findOne(idArt);
         Article article = providerConverterArticle.articleEntityToArticleModel(articleEntity);
         return article;
     }
 
-    public void updateQtyStockArticle(Integer idArticle, Integer qty)
-    {
+    public void updateQtyStockArticle(Integer idArticle, Integer qty) {
         articleRepository.updateQuantityArticle(idArticle, qty);
     }
 

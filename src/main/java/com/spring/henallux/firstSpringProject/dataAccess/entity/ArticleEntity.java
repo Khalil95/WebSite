@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name="article")
+@Table(name = "article")
 public class ArticleEntity {
 
     @Id
@@ -24,17 +24,21 @@ public class ArticleEntity {
     @Column(name = "quantityStock")
     private int quantityStock;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
-    @Column(name="picture")
+    @Column(name = "picture")
     private String picture;
 
     @OneToMany(mappedBy = "articleEntity", cascade = CascadeType.ALL)
     private Collection<CommandLineEntity> commandLineEntities;
 
-    public ArticleEntity(){}
-    public ArticleEntity(Integer id){this.id = id;}
+    public ArticleEntity() {
+    }
+
+    public ArticleEntity(Integer id) {
+        this.id = id;
+    }
 
     public void setPicture(String photo) {
         this.picture = photo;

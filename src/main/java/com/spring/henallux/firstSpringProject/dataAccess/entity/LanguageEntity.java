@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name="language")
+@Table(name = "language")
 public class LanguageEntity {
 
     @Id
     @GeneratedValue
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy="languageEntity")
+    @OneToMany(mappedBy = "languageEntity")
     private Collection<CategoryTranslationEntity> categoryTranslationEntityCollection;
 
     public Integer getId() {

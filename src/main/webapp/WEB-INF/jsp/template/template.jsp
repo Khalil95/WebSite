@@ -1,6 +1,6 @@
 <%@ include file="../include/importTags.jsp"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-
+<sec:authorize access="!isAthenticated()">
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +24,7 @@
     </style>
     <title>${title}</title>
 </head>
+
 
 <body class="w3-content" style="max-width:1200px">
 
@@ -109,7 +110,9 @@
 
     </header>
 
+
     <main>
+
        <div>
             <tiles:insertAttribute name = "main-content"/>
 
@@ -280,5 +283,6 @@
 
 
 </body>
-</html>
 
+</html>
+</sec:authorize>

@@ -90,7 +90,7 @@
         </tbody>
         <tfoot>
         <tr class="visible-xs">
-            <td class="text-center"><strong>Total 1.99</strong></td>
+            <td class="text-center"><strong>Total : ${priceTotal}$</strong></td>
         </tr>
         <tr>
             <td><a href="/firstSpring/home" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>

@@ -3,6 +3,7 @@ package com.spring.henallux.firstSpringProject.model;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.Max;
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-public class Client {
+public class Client{
 
     private Integer id;
     @NotEmpty(message = "This field is required !")

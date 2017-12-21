@@ -6,8 +6,8 @@ public enum EnumPages {
     CART("integrated:cart", "redirect:/cart"),
     ARTICLE_DETAIL("integrated:articleDetail", ""),
     CARRELAGE_INTERIEUR("integrated:carrelageInterieur", ""),
-    CHECKOUT("integrated:chekout", ""),
-    CONNECTION("integration:connection", "redirect:/connection"),
+    CHECKOUT("integrated:checkout", ""),
+    CONNECTION("integrated:connection", "redirect:/connection"),
     CONNECTION_INSCRIPTION("integrated:connectionInscription", "redirect:/connectionInscription"),
     ORDER_HISTORY("integrated:orderhistory", "");
 

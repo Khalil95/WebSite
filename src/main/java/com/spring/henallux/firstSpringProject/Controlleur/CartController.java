@@ -165,7 +165,7 @@ public class CartController {
         }
 
         command.setTotal_price(price);
-        command.setStatus(EnumStatutCommand.PAID.getCode());
+        command.setStatus("paid");
         commandDao.addCommand(command, commandLines);
         return "redirect:/command";
     }

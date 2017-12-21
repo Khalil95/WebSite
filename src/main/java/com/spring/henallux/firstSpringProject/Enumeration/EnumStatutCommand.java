@@ -15,4 +15,8 @@ public enum EnumStatutCommand {
     public String getCode(){
         return this.getCode();
     }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

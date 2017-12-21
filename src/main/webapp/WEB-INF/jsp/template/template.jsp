@@ -1,6 +1,5 @@
 <%@ include file="../include/importTags.jsp" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<sec:authorize access="!isAthenticated()">
     <!DOCTYPE html>
     <html>
     <head>
@@ -90,7 +89,7 @@
 
         <!-- Top header -->
         <header class="w3-container w3-xlarge">
-            <p class="w3-left"><spring:message code="home"/></p>
+            <p class="w3-left">Galaxie Carrelage</p>
             <div class="w3-right">
 
                 <div class="dropdown">
@@ -129,7 +128,7 @@
             </div>
 
             <div class="w3-container w3-text-grey" id="jeans">
-                <p>8 items</p>
+                <p>items</p>
             </div>
 
             <!-- Product grid  Articles !!!! -->
@@ -301,4 +300,4 @@
     </body>
 
     </html>
-</sec:authorize>
+

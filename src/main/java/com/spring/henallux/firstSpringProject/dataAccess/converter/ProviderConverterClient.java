@@ -21,11 +21,13 @@ public class ProviderConverterClient {
         entity.setCity(client.getCity());
         entity.setZip(client.getZip());
         entity.setCountry(client.getCountry());
-        entity.setJob(client.getJob());
+
         if (client.getId() != null)
             entity.setId(client.getId());
         if ("".equals(client.getJob())) // pour gere les nul pointeur exception
             entity.setJob(null);
+        else
+            entity.setJob(client.getJob());
         return entity;
     }
 
@@ -43,9 +45,10 @@ public class ProviderConverterClient {
         model.setCity(clientEntity.getCity());
         model.setZip(clientEntity.getZip());
         model.setCountry(clientEntity.getCountry());
-        if (model.getJob() == null) {
+        if("".equals(model.getJob()))
+            model.setJob(null);
+        else
             model.setJob(clientEntity.getJob());
-        }
         return model;
     }
 }

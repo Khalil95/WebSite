@@ -6,7 +6,6 @@ import com.spring.henallux.firstSpringProject.model.Client;
 import com.spring.henallux.firstSpringProject.service.EncryptionPassword;
 import com.spring.henallux.firstSpringProject.model.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,8 +42,8 @@ public class ConnectionController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/send")
-    public String login(Model model, @ModelAttribute(value = CURRENTCLIENT) Client currentClient, Authentication authentication, Locale locale, @ModelAttribute(value = "loginForm") LoginForm loginForm, final BindingResult errors) {
-        Client client = /*clientDao.getClientByEmail(loginForm.getEmail());*/ (Client) authentication.getPrincipal();
+    public String login(Model model, @ModelAttribute(value = CURRENTCLIENT) Client currentClient, Locale locale, @ModelAttribute(value = "loginForm") LoginForm loginForm, final BindingResult errors) {
+        Client client = clientDao.getClientByEmail(loginForm.getEmail());
 
         if (client == null)
             errors.rejectValue("email", "email.notfound");

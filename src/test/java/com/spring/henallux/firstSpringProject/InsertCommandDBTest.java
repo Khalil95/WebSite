@@ -1,22 +1,13 @@
 package com.spring.henallux.firstSpringProject;
 
-import com.spring.henallux.firstSpringProject.dataAccess.dao.CommandDao;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.ArticleEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.ClientEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.CommandEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.CommandLineEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.repository.CommandRepository;
-import com.spring.henallux.firstSpringProject.model.Article;
-import com.spring.henallux.firstSpringProject.model.Client;
-import com.spring.henallux.firstSpringProject.model.Command;
-import com.spring.henallux.firstSpringProject.model.CommandLine;
 import com.spring.henallux.firstSpringProject.service.EncryptionPassword;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,11 +17,6 @@ public class InsertCommandDBTest {
 
     @Autowired
     private CommandRepository commandRepository;
-
-    @Before
-    public void init(){
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void insertComannd(){
@@ -42,7 +28,7 @@ public class InsertCommandDBTest {
 
         List<CommandLineEntity> listComanndLines = new ArrayList(){
             {
-                add(commandEntity);
+                add(commandLineEntity);
             }
         };
 
@@ -84,7 +70,7 @@ public class InsertCommandDBTest {
         client.setLast_name("Khalil");
         client.setFirst_name("Bhilal");
         client.setCountry("*Belgium");
-        client.setJob("");
+        client.setJob("maçon");
         client.setPassword(EncryptionPassword.getEncryptionPassword("bibil"));
         client.setPhone_number("089658932");
         client.setStreet_name("je le saurai");

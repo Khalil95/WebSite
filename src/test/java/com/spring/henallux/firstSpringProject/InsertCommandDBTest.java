@@ -1,12 +1,23 @@
 package com.spring.henallux.firstSpringProject;
 
+import com.spring.henallux.firstSpringProject.dataAccess.dao.CommandDao;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.ArticleEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.ClientEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.CommandEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.CommandLineEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.repository.CommandRepository;
+import com.spring.henallux.firstSpringProject.model.Article;
+import com.spring.henallux.firstSpringProject.model.Client;
+import com.spring.henallux.firstSpringProject.model.Command;
+import com.spring.henallux.firstSpringProject.model.CommandLine;
 import com.spring.henallux.firstSpringProject.service.EncryptionPassword;
+import static  org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Incubating;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -15,30 +26,39 @@ import java.util.List;
 
 public class InsertCommandDBTest {
 
-    @Autowired
+
+    @InjectMocks
+    private CommandDao dao = new CommandDao();
+    @Mock
     private CommandRepository commandRepository;
+
+    @Before
+    public void init(){
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void insertComannd(){
 
-        CommandLineEntity commandLineEntity = initCommandLineEntity();
-        CommandEntity commandEntity = initCommand();
-        ClientEntity clientEntity = initClientEntity();
-        commandEntity.setClientEntity(clientEntity);
+        CommandLine commandLineEntity = initCommandLineEntity();
+        Command commandEntity = initCommand();
+        Client clientEntity = initClientEntity();
+        commandEntity.setClient(clientEntity);
 
-        List<CommandLineEntity> listComanndLines = new ArrayList(){
+        List<CommandLine> listComanndLines = new ArrayList(){
             {
                 add(commandLineEntity);
             }
         };
 
-        commandEntity.setCommandLineEntityCollection(listComanndLines);
-        commandRepository.save(commandEntity);
+        commandEntity = dao.addCommand(commandEntity, listComanndLines);
+        assertNotNull(commandEntity);
+        assertNotNull(commandEntity.getId());
     }
 
-    private CommandLineEntity initCommandLineEntity(){
+    private CommandLine initCommandLineEntity(){
 
-        ArticleEntity article = new ArticleEntity();
+        Article article = new Article();
         article.setId(1);
         article.setDescription("Couteau qui coupe");
         article.setName("Couteau");
@@ -46,24 +66,24 @@ public class InsertCommandDBTest {
         article.setPrice(12);
         article.setQuantityStock(25);
 
-        CommandLineEntity commandLine = new CommandLineEntity();
-        commandLine.setArticleEntity(article);
+        CommandLine commandLine = new CommandLine();
+        commandLine.setArticle(article);
         commandLine.setNumber_article(1);
-        commandLine.setPriceArticle(12.5);
+        commandLine.setPrice_article(12.5);
         return commandLine;
     }
 
-    private CommandEntity initCommand(){
-        CommandEntity command = new CommandEntity();
+    private Command initCommand(){
+        Command command = new Command();
         command.setDate(new Date());
         command.setStatus("UNPAID");
         command.setTotal_price(12.5);
         return command;
     }
 
-    private ClientEntity initClientEntity(){
+    private Client initClientEntity(){
 
-        ClientEntity client = new ClientEntity();
+        Client client = new Client();
         client.setEmail("bil@gmail.fr");
         client.setNumber_address("26");
         client.setCity("Chaudfontaine");

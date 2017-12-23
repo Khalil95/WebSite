@@ -166,7 +166,7 @@ public class CartController {
 
         command.setTotal_price(price);
         command.setStatus("paid");
-        commandDao.addCommand(command, commandLines);
+        command = commandDao.addCommand(command, commandLines);
         return "redirect:/command";
     }
 

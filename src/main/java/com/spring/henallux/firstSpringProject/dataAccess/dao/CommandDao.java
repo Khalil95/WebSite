@@ -2,8 +2,6 @@ package com.spring.henallux.firstSpringProject.dataAccess.dao;
 
 import com.spring.henallux.firstSpringProject.dataAccess.converter.ProviderConverterCommand;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.CommandEntity;
-import com.spring.henallux.firstSpringProject.dataAccess.entity.CommandLineEntity;
-import com.spring.henallux.firstSpringProject.dataAccess.repository.CommandLineRepository;
 import com.spring.henallux.firstSpringProject.dataAccess.repository.CommandRepository;
 import com.spring.henallux.firstSpringProject.model.Client;
 import com.spring.henallux.firstSpringProject.model.Command;
@@ -24,12 +22,12 @@ public class CommandDao {
     @Autowired
     CommandRepository commandRepository;
 
-    public void addCommand(Command command, List<CommandLine> commandLines) {
+    public Command addCommand(Command command, List<CommandLine> commandLines) {
 
         command.setCommandLines(commandLines);
         CommandEntity commandEntity = providerConverterCommand.commandModelToCommandEntity(command);
-        commandRepository.save(commandEntity);
-
+        CommandEntity entity = commandRepository.save(commandEntity);
+        return providerConverterCommand.commandEntityToCommandModel(entity);
     }
 
     public List<Command> getCommandByClient(Client client) {

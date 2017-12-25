@@ -3,12 +3,10 @@ package com.spring.henallux.firstSpringProject.model;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Data
 public class Client {
@@ -21,7 +19,7 @@ public class Client {
     @NotEmpty
     @Size(min = 4, max = 16)
     private String password;
-    @NotNull
+    @NotEmpty
     @Size(min = 4, max = 16)
     private String passwordConfirmation;
     @NotEmpty
@@ -42,9 +40,9 @@ public class Client {
     @NotEmpty
     @Size(min = 2, max = 50)
     private String city;
+    @NotNull
     @Min(0)
     @Max(9999)
-    @NotNull
     private Integer zip;
     @NotEmpty
     @Size(min = 2, max = 50)
@@ -59,6 +57,7 @@ public class Client {
     public Client() {
     }
 
+
     public Command getCommand() {
         return command;
     }
@@ -69,6 +68,10 @@ public class Client {
 
     public void setRegistered(boolean registered) {
         this.registered = registered;
+    }
+
+    public void setZip(Integer zip) {
+        this.zip = zip;
     }
 
     public boolean isRegistered() {
@@ -86,11 +89,6 @@ public class Client {
     public void setCity(String city) {
         this.city = city;
     }
-
-    public void setZip(Integer zip) {
-        this.zip = zip;
-    }
-
 
     public void setCountry(String country) {
         this.country = country;

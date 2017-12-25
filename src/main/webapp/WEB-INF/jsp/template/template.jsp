@@ -72,7 +72,7 @@
 
     <!-- Top menu on small screens -->
     <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-        <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+        <div class="w3-bar-item w3-padding-24 w3-wide">Galaxie</div>
         <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i
                 class="fa fa-bars"></i></a>
     </header>
@@ -127,27 +127,26 @@
 
             </div>
 
-            <div class="w3-container w3-text-grey" id="jeans">
-                <p>items</p>
-            </div>
-
             <!-- Product grid  Articles !!!! -->
 
 
             <div class="w3-row w3-grayscale">
-                <div class="w3-col l3 s6">
+
+
+
                     <c:forEach items="${articles}" var="article">
+                        <div class="w3-col l3 s6">
                         <div class="w3-container">
                             <a href="/firstSpring/home/${article.id}">
                                 <img src='<spring:url value="/images/gray_tile.JPG"/>' style="width:100%">
                             </a>
                             <p>${article.name}<br><b>${article.price}$</b></p>
                         </div>
+                        </div>
                     </c:forEach>
-                </div>
 
 
-                <div class="w3-col l3 s6">
+             <!--   <div class="w3-col l3 s6">
                     <div class="w3-container">
                         <div class="w3-display-container">
                             <img src="/w3images/jeans2.jpg" style="width:100%">
@@ -162,35 +161,8 @@
                         <img src="/w3images/jeans3.jpg" style="width:100%">
                         <p>Washed Skinny Jeans<br><b>$20.50</b></p>
                     </div>
-                </div>
+                </div>-->
 
-                <div class="w3-col l3 s6">
-                    <div class="w3-container">
-                        <img src="/w3images/jeans3.jpg" style="width:100%">
-                        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
-                    </div>
-                    <div class="w3-container">
-                        <div class="w3-display-container">
-                            <img src="/w3images/jeans4.jpg" style="width:100%">
-                            <span class="w3-tag w3-display-topleft">Sale</span>
-                            <div class="w3-display-middle w3-display-hover">
-                                <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                        <p>Vintage Skinny Jeans<br><b class="w3-text-red">$14.99</b></p>
-                    </div>
-                </div>
-
-                <div class="w3-col l3 s6">
-                    <div class="w3-container">
-                        <img src="/w3images/jeans4.jpg" style="width:100%">
-                        <p>Vintage Skinny Jeans<br><b>$14.99</b></p>
-                    </div>
-                    <div class="w3-container">
-                        <img src="/w3images/jeans1.jpg" style="width:100%">
-                        <p>Ripped Skinny Jeans<br><b>$24.99</b></p>
-                    </div>
-                </div>
             </div>
 
         </main>

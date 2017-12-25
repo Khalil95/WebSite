@@ -44,7 +44,11 @@
             <p><form:errors path="city" class="required"/></p>
             <p><form:input class="w3-input w3-border" type="text" path="zip" placeholder="Zip"
                            name="Zip"></form:input></p>
-            <p><form:errors path="zip" class="required"/></p>
+            <c:set var="domainZipErrors"><form:errors path="zip"/></c:set>
+            <c:if test="${not empty domainZipErrors}">
+                <p><spring:message code="invalidZip"/></p>
+            </c:if>
+
             <p><form:input class="w3-input w3-border" type="text" path="country" placeholder="Country"
                            name="Country"></form:input></p>
             <p><form:errors path="country" class="required"/></p>

@@ -23,7 +23,7 @@ public class CommandEntity {
     private double total_price;
 
     @JoinColumn(name = "idclient", referencedColumnName = "id")
-    @ManyToOne(cascade = CascadeType.MERGE)//merge
+    @ManyToOne
     private ClientEntity clientEntity;
 
     @OneToMany(mappedBy = "commandEntity", cascade = CascadeType.ALL)

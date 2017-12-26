@@ -23,10 +23,7 @@ public class ProviderConverterClient {
         entity.setCity(client.getCity());
         entity.setZip(client.getZip());
         entity.setCountry(client.getCountry());
-//        if("".equals(client.getJob()))
-//            entity.setJob(null);
-//        else
-//            entity.setJob(client.getJob());
+        //Il met null comme type par défaut
         entity.setJob(client.getJob());
 
         return entity;

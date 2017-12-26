@@ -57,6 +57,7 @@ public class CartController {
             Article article = articleDao.getOneArticle(entry.getKey());
 
             if (entry.getValue() > article.getQuantityStock()) {
+                //Y'en a plus en stock, mettre le produit en "Indisponible" ?
                 entry.setValue(this.qty);
                 sb.append(EnumPages.HOME.getRedirection()).append("/").append(entry.getKey());
                 return sb.toString();

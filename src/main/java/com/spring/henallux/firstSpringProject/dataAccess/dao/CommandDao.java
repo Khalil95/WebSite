@@ -28,9 +28,7 @@ public class CommandDao {
 
 
         command.setCommandLines(commandLines);
-
         CommandEntity commandEntity = providerConverterCommand.commandModelToCommandEntity(command);
-
         commandRepository.save(commandEntity);
 
     }

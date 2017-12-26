@@ -11,6 +11,8 @@ public class ProviderConverterClient {
     public ClientEntity ClientModelToClientEntity(Client client) {
 
         ClientEntity entity = new ClientEntity();
+        //Le client existe forcément dans la DB
+        entity.setId(client.getId());
         entity.setEmail(client.getEmail());
         entity.setFirst_name(client.getFirst_name());
         entity.setLast_name(client.getLast_name());
@@ -21,10 +23,11 @@ public class ProviderConverterClient {
         entity.setCity(client.getCity());
         entity.setZip(client.getZip());
         entity.setCountry(client.getCountry());
-        if("".equals(client.getJob()))
-            entity.setJob(null);
-        else
-            entity.setJob(client.getJob());
+//        if("".equals(client.getJob()))
+//            entity.setJob(null);
+//        else
+//            entity.setJob(client.getJob());
+        entity.setJob(client.getJob());
 
         return entity;
     }
